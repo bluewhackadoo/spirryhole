@@ -367,9 +367,9 @@ footer .tiny {
 <nav>
   <div class="inner nav-row">
     <span class="logo">SPIRRY<em>HOLE</em>.COM</span>
-    <a href="#">TRUTH INDEX</a>
-    <a href="#">SUBMIT TIP</a>
-    <a href="#">ABOUT</a>
+    <a href="index.html">TRUTH INDEX</a>
+    <a href="submit.html">SUBMIT TIP</a>
+    <a href="about.html">ABOUT</a>
     <span class="signal-bar" id="sigbar">SIG ████</span>
     <span class="live" id="live">● UPLINK ACTIVE</span>
   </div>
@@ -757,28 +757,38 @@ function safeHTML(str) {
 }
 
 function renderPosts() {
-  const grid  = document.getElementById('grid');
-  const count = document.getElementById('count');
-  const mixed = shuffle(POSTS);
+  try {
+    const grid  = document.getElementById('grid');
+    const count = document.getElementById('count');
+    if (!grid || !count) {
+      console.error('renderPosts: grid or count element not found', { grid, count });
+      return;
+    }
+    const mixed = shuffle(POSTS);
 
-  count.textContent = `${mixed.length} TRANSMISSIONS RECEIVED · DECRYPTING`;
+    count.textContent = `${mixed.length} TRANSMISSIONS RECEIVED · DECRYPTING`;
 
-  grid.innerHTML = mixed.map(p => `
-    <article class="card ${p.type}">
-      <div class="card-tag">▸ ${p.tag}</div>
-      <h2 class="card-title">${p.title}</h2>
-      <p class="card-body">${safeHTML(p.body)}</p>
-      <div class="card-foot">
-        <span>⌖ ${p.views} RECIPIENTS</span>
-        <span>⏱ ${p.time} MIN DECRYPT</span>
-      </div>
-      <div class="stamp">${p.stamp}</div>
-    </article>
-  `).join('');
+    grid.innerHTML = mixed.map(p => `
+      <article class="card ${p.type}">
+        <div class="card-tag">▸ ${p.tag}</div>
+        <h2 class="card-title">${p.title}</h2>
+        <p class="card-body">${safeHTML(p.body)}</p>
+        <div class="card-foot">
+          <span>⌖ ${p.views} RECIPIENTS</span>
+          <span>⏱ ${p.time} MIN DECRYPT</span>
+        </div>
+        <div class="stamp">${p.stamp}</div>
+      </article>
+    `).join('');
 
-  setTimeout(() => {
-    count.textContent = `${mixed.length} TRANSMISSIONS ACTIVE · ALL NODES CONFIRMED`;
-  }, 1400);
+    setTimeout(() => {
+      count.textContent = `${mixed.length} TRANSMISSIONS ACTIVE · ALL NODES CONFIRMED`;
+    }, 1400);
+  } catch (err) {
+    console.error('renderPosts failed:', err);
+    const grid = document.getElementById('grid');
+    if (grid) grid.innerHTML = '<p class="card-body" style="color:var(--red-blink);padding:1rem;">ERROR: ' + err.message + '</p>';
+  }
 }
 
 renderPosts();
