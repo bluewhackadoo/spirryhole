@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>spirryhole.com — about this node</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#05050e;--text:#9898b8;--text-dim:#404060;--text-bright:#c8c8e8;--border:rgba(120,120,200,0.07);--border-hover:rgba(140,140,220,0.18);--green:#00ff41;--green-dim:rgba(0,255,65,0.35);--red-blink:rgba(255,50,50,0.85)}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Courier New',Courier,monospace;min-height:100vh;overflow-x:hidden}
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+.inner{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+nav{position:sticky;top:0;z-index:200;background:rgba(5,5,14,0.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.nav-row{display:flex;align-items:center;gap:2rem;padding:.85rem 0}
+.logo{font-size:.95rem;font-weight:bold;color:var(--text-bright);letter-spacing:2px;flex:1}
+.logo em{color:var(--green);font-style:normal}
+nav a{color:var(--text-dim);text-decoration:none;font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s}
+nav a:hover{color:var(--text)}
+nav a.active{color:var(--text)}
+.live{font-size:.62rem;color:var(--green);letter-spacing:1px;animation:blink 1.3s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.1}}
+.page{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:4rem 1.5rem}
+h1{font-size:1.4rem;color:var(--text-bright);letter-spacing:3px;text-transform:uppercase;margin-bottom:.5rem}
+.pre-tag{font-size:.58rem;letter-spacing:4px;color:var(--text-dim);text-transform:uppercase;margin-bottom:1rem}
+.line{width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--green-dim),transparent);margin:1.5rem 0}
+.section{margin-bottom:2.5rem}
+.section-label{font-size:.55rem;letter-spacing:3px;color:var(--text-dim);text-transform:uppercase;margin-bottom:.7rem}
+.section p{font-size:.78rem;line-height:1.9;color:var(--text)}
+.blk{background:#9898b8;color:transparent;border-radius:1px;padding:0 1px;user-select:none}
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:2rem 0;text-align:center}
+footer p{font-size:.58rem;color:var(--text-dim);letter-spacing:1px;line-height:2.2}
+footer .blkf{background:var(--text-dim);color:transparent;border-radius:1px}
+footer .tiny{opacity:.3;font-size:.48rem;margin-top:.5rem;font-style:italic}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<nav>
+  <div class="inner nav-row">
+    <a href="index.html" class="logo">SPIRRY<em>HOLE</em>.COM</a>
+    <a href="index.html">TRUTH INDEX</a>
+    <a href="submit.html">SUBMIT TIP</a>
+    <a href="about.html" class="active">ABOUT</a>
+    <span class="live">● UPLINK ACTIVE</span>
+  </div>
+</nav>
+<div class="page">
+  <p class="pre-tag">// NODE DOSSIER — CLEARANCE LEVEL: PUBLIC //</p>
+  <h1>About This Node</h1>
+  <div class="line"></div>
+
+  <div class="section">
+    <div class="section-label">▸ OPERATIONAL STATUS</div>
+    <p>spirryhole.com has been active since <span class="blk">████</span>. We have been contacted by <span class="blk">████████</span> on <span class="blk">██</span> separate occasions. We are still here.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">▸ WHO WE ARE</div>
+    <p>A collective of individuals who noticed things that didn't add up. Names are classified. Faces are redacted. We meet in a location that does not appear on any map we have been able to verify.</p>
+    <br>
+    <p>We are not affiliated with any government, intelligence agency, or intergalactic governing body — that we are aware of.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">▸ WHAT WE DO</div>
+    <p>We receive transmissions. We verify what we can. We publish everything. Some of what you've been told to dismiss as conspiracy is documented historical fact. Some of what sounds plausible is completely made up. We don't always tell you which is which. That's the point.</p>
+    <br>
+    <p>The truth is in here. Somewhere. Good luck.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">▸ CONTACT</div>
+    <p>Use the <a href="submit.html" style="color:var(--text);text-decoration:underline">tip submission node</a>. Do not use your real name. Do not use your home network. We cannot protect you. We could barely protect ourselves.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">▸ LEGAL</div>
+    <p>spirryhole.com is a work of satire. Some posts present documented, verifiable facts through a conspiratorial lens. Some posts are completely absurd. We leave the exercise of determining which is which to the reader. This is, in fact, the entire exercise.</p>
+  </div>
+</div>
+<footer>
+  <div class="inner">
+    <p>SPIRRYHOLE.COM &nbsp;·&nbsp; NODE <span class="blkf">████</span> &nbsp;·&nbsp; ALL TRANSMISSIONS ENCRYPTED</p>
+    <p>© <span class="blkf">████</span> SPIRRYHOLE.COM &nbsp;·&nbsp; WE ARE NOT RESPONSIBLE FOR YOUR AWAKENING</p>
+    <p class="tiny">*this site is satire.</p>
+  </div>
+</footer>
+<script>
+const canvas=document.getElementById('bg'),ctx=canvas.getContext('2d');
+let W,H,stars=[],mx=0,my=0;
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
+function mkStars(){stars=Array.from({length:200},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.1+.25,sp:Math.random()*.007+.002,ph:Math.random()*Math.PI*2,pl:Math.random()*.25+.05,hue:Math.random()<.12?'blue':Math.random()<.08?'warm':'white'}))}
+function draw(t){ctx.clearRect(0,0,W,H);[{cx:W*.12,cy:H*.25,r:260,c:'20,0,60'},{cx:W*.82,cy:H*.65,r:220,c:'0,20,55'}].forEach(b=>{const g=ctx.createRadialGradient(b.cx,b.cy,0,b.cx,b.cy,b.r);g.addColorStop(0,`rgba(${b.c},0.07)`);g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.beginPath();ctx.arc(b.cx,b.cy,b.r,0,Math.PI*2);ctx.fill()});const ox=(mx/W-.5)*18,oy=(my/H-.5)*12;stars.forEach(s=>{const tw=.3+.7*Math.abs(Math.sin(t*s.sp+s.ph)),px=s.x+ox*s.pl,py=s.y+oy*s.pl;ctx.beginPath();ctx.arc(px,py,s.r,0,Math.PI*2);ctx.fillStyle=s.hue==='blue'?`rgba(140,180,255,${tw*.75})`:s.hue==='warm'?`rgba(255,210,140,${tw*.65})`:`rgba(190,190,215,${tw*.65})`;ctx.fill()})}
+let T=0;(function loop(){T+=.012;draw(T);requestAnimationFrame(loop)})();
+window.addEventListener('resize',()=>{resize();mkStars()});
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+resize();mkStars();
+</script>
+</body>
+</html>

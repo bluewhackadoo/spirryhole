@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>spirryhole.com — submit tip</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#05050e;--text:#9898b8;--text-dim:#404060;--text-bright:#c8c8e8;--border:rgba(120,120,200,0.07);--border-hover:rgba(140,140,220,0.3);--green:#00ff41;--green-dim:rgba(0,255,65,0.35);--red-blink:rgba(255,50,50,0.85)}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Courier New',Courier,monospace;min-height:100vh;overflow-x:hidden}
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+.inner{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+nav{position:sticky;top:0;z-index:200;background:rgba(5,5,14,0.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.nav-row{display:flex;align-items:center;gap:2rem;padding:.85rem 0}
+.logo{font-size:.95rem;font-weight:bold;color:var(--text-bright);letter-spacing:2px;flex:1}
+.logo em{color:var(--green);font-style:normal}
+nav a{color:var(--text-dim);text-decoration:none;font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s}
+nav a:hover,nav a.active{color:var(--text)}
+.live{font-size:.62rem;color:var(--green);letter-spacing:1px;animation:blink 1.3s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.1}}
+.page{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:4rem 1.5rem}
+h1{font-size:1.4rem;color:var(--text-bright);letter-spacing:3px;text-transform:uppercase;margin-bottom:.5rem}
+.pre-tag{font-size:.58rem;letter-spacing:4px;color:var(--text-dim);margin-bottom:1rem}
+.line{width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--green-dim),transparent);margin:1.5rem 0}
+.warn{font-size:.68rem;line-height:1.8;color:var(--text-dim);margin-bottom:2rem;padding:.8rem 1rem;border:1px solid rgba(255,50,50,.15);border-radius:2px}
+.field{margin-bottom:1.5rem}
+.field label{display:block;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);margin-bottom:.5rem}
+.field input,
+.field textarea,
+.field select{width:100%;background:rgba(10,10,20,0.8);border:1px solid var(--border);border-radius:2px;padding:.7rem 1rem;color:var(--text-bright);font-family:'Courier New',monospace;font-size:.78rem;outline:none;transition:border-color .2s;resize:vertical}
+.field input:focus,
+.field textarea:focus,
+.field select:focus{border-color:var(--border-hover)}
+.field textarea{min-height:140px}
+.field select option{background:#0a0a18}
+.submit-btn{background:transparent;border:1px solid rgba(0,255,65,.3);color:var(--green);font-family:'Courier New',monospace;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;padding:.7rem 2rem;cursor:pointer;transition:all .2s;border-radius:2px}
+.submit-btn:hover{background:rgba(0,255,65,.05);border-color:var(--green)}
+.disclaimer{font-size:.55rem;color:var(--text-dim);margin-top:1rem;line-height:1.8;opacity:.6}
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:2rem 0;text-align:center;margin-top:4rem}
+footer p{font-size:.58rem;color:var(--text-dim);letter-spacing:1px;line-height:2.2}
+.blkf{background:var(--text-dim);color:transparent;border-radius:1px}
+footer .tiny{opacity:.3;font-size:.48rem;margin-top:.5rem;font-style:italic}
+#confirm{display:none;padding:2rem;border:1px solid rgba(0,255,65,.2);border-radius:2px;text-align:center}
+#confirm h2{color:var(--green);font-size:1rem;letter-spacing:3px;margin-bottom:1rem}
+#confirm p{font-size:.72rem;color:var(--text-dim);line-height:1.9}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<nav>
+  <div class="inner nav-row">
+    <a href="index.html" class="logo">SPIRRY<em>HOLE</em>.COM</a>
+    <a href="index.html">TRUTH INDEX</a>
+    <a href="submit.html" class="active">SUBMIT TIP</a>
+    <a href="about.html">ABOUT</a>
+    <span class="live">● UPLINK ACTIVE</span>
+  </div>
+</nav>
+
+<div class="page">
+  <p class="pre-tag">// SECURE TRANSMISSION UPLINK //</p>
+  <h1>Submit a Tip</h1>
+  <div class="line"></div>
+
+  <div class="warn">
+    ⚠ OPSEC NOTICE: Do not submit from your home network. Do not use your real name. 
+    We cannot guarantee your anonymity. We can barely guarantee our own.
+    All submissions are reviewed by a human — probably.
+  </div>
+
+  <form id="tipform" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <div class="field">
+      <label>Codename (do not use real name)</label>
+      <input type="text" name="codename" placeholder="e.g. NIGHTHAWK, DEEPWATER, UNNAMED SOURCE" />
+    </div>
+    <div class="field">
+      <label>Transmission Type</label>
+      <select name="type">
+        <option value="">— SELECT CLASSIFICATION —</option>
+        <option value="sp">Unconfirmed Intelligence (spirry)</option>
+        <option value="tr">Suppressed Truth (documented)</option>
+        <option value="unknown">Unknown — let us decide</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Transmission Content</label>
+      <textarea name="body" placeholder="State what you know. Include any sources, coordinates, or documentation references. Redact what you must."></textarea>
+    </div>
+    <div class="field">
+      <label>Source Verification (optional)</label>
+      <input type="text" name="source" placeholder="Document, link, declassified file, 'trust me', etc." />
+    </div>
+    <button type="submit" class="submit-btn">▸ TRANSMIT</button>
+    <p class="disclaimer">
+      By submitting you confirm this is satire, speculation, or documented fact — and that you understand we may publish, ignore, or lose it entirely.
+      We do not sell your data. We barely know what data we have.
+    </p>
+  </form>
+
+  <div id="confirm">
+    <h2>TRANSMISSION RECEIVED</h2>
+    <p>Your tip has been logged.<br>
+    Signal trace detected — just kidding.<br>
+    Probably.<br><br>
+    <a href="index.html" style="color:var(--text);text-decoration:underline">Return to the feed.</a></p>
+  </div>
+</div>
+
+<footer>
+  <div class="inner">
+    <p>SPIRRYHOLE.COM &nbsp;·&nbsp; NODE <span class="blkf">████</span> &nbsp;·&nbsp; ALL TRANSMISSIONS ENCRYPTED</p>
+    <p>© <span class="blkf">████</span> SPIRRYHOLE.COM &nbsp;·&nbsp; WE ARE NOT RESPONSIBLE FOR YOUR AWAKENING</p>
+    <p class="tiny">*this site is satire.</p>
+  </div>
+</footer>
+
+<script>
+/* form intercept for nice confirm UX */
+document.getElementById('tipform').addEventListener('submit', function(e) {
+  e.preventDefault();
+  /* swap to Formspree real submit if you set YOUR_FORM_ID */
+  document.getElementById('tipform').style.display = 'none';
+  document.getElementById('confirm').style.display = 'block';
+  /* uncomment to actually POST to Formspree:
+  fetch(this.action, {method:'POST',body:new FormData(this),headers:{'Accept':'application/json'}})
+    .then(()=>{ this.style.display='none'; document.getElementById('confirm').style.display='block'; });
+  */
+});
+
+/* starfield (minimal) */
+const canvas=document.getElementById('bg'),ctx=canvas.getContext('2d');
+let W,H,stars=[],mx=0,my=0;
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
+function mkStars(){stars=Array.from({length:180},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.1+.25,sp:Math.random()*.007+.002,ph:Math.random()*Math.PI*2,pl:Math.random()*.25+.05,hue:Math.random()<.12?'blue':Math.random()<.08?'warm':'white'}))}
+function draw(t){ctx.clearRect(0,0,W,H);const ox=(mx/W-.5)*18,oy=(my/H-.5)*12;stars.forEach(s=>{const tw=.3+.7*Math.abs(Math.sin(t*s.sp+s.ph)),px=s.x+ox*s.pl,py=s.y+oy*s.pl;ctx.beginPath();ctx.arc(px,py,s.r,0,Math.PI*2);ctx.fillStyle=s.hue==='blue'?`rgba(140,180,255,${tw*.75})`:s.hue==='warm'?`rgba(255,210,140,${tw*.65})`:`rgba(190,190,215,${tw*.65})`;ctx.fill()})}
+let T=0;(function loop(){T+=.012;draw(T);requestAnimationFrame(loop)})();
+window.addEventListener('resize',()=>{resize();mkStars()});
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+resize();mkStars();
+</script>
+</body>
+</html>
