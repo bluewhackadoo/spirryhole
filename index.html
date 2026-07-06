@@ -413,6 +413,7 @@ footer .tiny {
 </footer>
 
 <script>
+try {
 /* ═══════════════════════════════════════════════════
    DEBUG PANEL
 ═══════════════════════════════════════════════════ */
@@ -749,11 +750,12 @@ const POSTS = [
     views: '67.2k', time: '8'
   }
 ];
-
+logDebug('POSTS array defined, len=' + POSTS.length);
 
 /* ═══════════════════════════════════════════════════
    SHUFFLE + RENDER
 ═══════════════════════════════════════════════════ */
+logDebug('defining shuffle');
 function shuffle(arr) {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -762,10 +764,13 @@ function shuffle(arr) {
   }
   return a;
 }
+logDebug('shuffle defined');
 
+logDebug('defining safeHTML');
 function safeHTML(str) {
   return str.replace(/████+/g, '<span class="redacted">████████</span>');
 }
+logDebug('safeHTML defined');
 
 function renderPosts() {
   try {
@@ -811,6 +816,9 @@ function renderPosts() {
 renderPosts();
 
 window.addEventListener('error', e => logDebug('GLOBAL ERR: ' + e.message));
+} catch (e) {
+  logDebug('CATCH: ' + e.message + ' at ' + e.stack);
+}
 </script>
 </body>
 </html>
