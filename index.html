@@ -472,6 +472,7 @@ function tryShoot() {
 }
 
 function drawFrame(t) {
+  if (!W || !H || !isFinite(W) || !isFinite(H) || W <= 0 || H <= 0) return;
   ctx.clearRect(0, 0, W, H);
 
   // nebula blobs
@@ -480,12 +481,14 @@ function drawFrame(t) {
     { cx: W * 0.82, cy: H * 0.65, r: 220, c: '0,20,55' },
     { cx: W * 0.5,  cy: H * 0.5,  r: 180, c: '10,0,40' }
   ].forEach(b => {
-    const g = ctx.createRadialGradient(b.cx, b.cy, 0, b.cx, b.cy, b.r);
+    const cx = b.cx, cy = b.cy, r = b.r;
+    if (!isFinite(cx) || !isFinite(cy) || !isFinite(r) || r <= 0) return;
+    const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
     g.addColorStop(0, `rgba(${b.c},0.07)`);
     g.addColorStop(1, 'transparent');
     ctx.fillStyle = g;
     ctx.beginPath();
-    ctx.arc(b.cx, b.cy, b.r, 0, Math.PI * 2);
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
     ctx.fill();
   });
 
@@ -498,6 +501,7 @@ function drawFrame(t) {
     const twink = 0.3 + 0.7 * Math.abs(Math.sin(t * s.sp + s.ph));
     const px = s.x + ox * s.pl;
     const py = s.y + oy * s.pl;
+    if (!isFinite(px) || !isFinite(py)) return;
     ctx.beginPath();
     ctx.arc(px, py, s.r, 0, Math.PI * 2);
     if (s.hue === 'blue') ctx.fillStyle = `rgba(140,180,255,${twink * 0.75})`;
@@ -512,6 +516,7 @@ function drawFrame(t) {
     s.y += s.vy;
     if (s.x > W + 20) s.x = -20;
     if (s.x < -20) s.x = W + 20;
+    if (!isFinite(s.x) || !isFinite(s.y)) return;
     ctx.fillStyle = 'rgba(170,210,255,0.55)';
     ctx.beginPath();
     ctx.arc(s.x, s.y, 1.1, 0, Math.PI * 2);
