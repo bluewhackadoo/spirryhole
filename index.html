@@ -398,7 +398,6 @@ footer .tiny {
       <span id="count">LOADING TRANSMISSIONS...</span>
       <span id="node-status">ALL NODES ACTIVE · SIGNAL STRONG</span>
     </div>
-    <div id="debug" style="color:var(--red-blink);font-size:0.7rem;padding:0.5rem 0;min-height:1.5rem;"></div>
     <div class="grid" id="grid"></div>
   </section>
 
@@ -413,16 +412,6 @@ footer .tiny {
 </footer>
 
 <script>
-try {
-/* ═══════════════════════════════════════════════════
-   DEBUG PANEL
-═══════════════════════════════════════════════════ */
-function logDebug(msg) {
-  const d = document.getElementById('debug');
-  if (d) d.textContent += (d.textContent ? ' | ' : '') + msg;
-  console.log('[spirryhole debug]', msg);
-}
-logDebug('JS loaded');
 
 /* ═══════════════════════════════════════════════════
    STARFIELD
@@ -755,12 +744,10 @@ const POSTS = [
     views: '67.2k', time: '8'
   }
 ];
-logDebug('POSTS array defined, len=' + POSTS.length);
 
 /* ═══════════════════════════════════════════════════
    SHUFFLE + RENDER
 ═══════════════════════════════════════════════════ */
-logDebug('defining shuffle');
 function shuffle(arr) {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -769,61 +756,39 @@ function shuffle(arr) {
   }
   return a;
 }
-logDebug('shuffle defined');
 
-logDebug('defining safeHTML');
 function safeHTML(str) {
   return str.replace(/████+/g, '<span class="redacted">████████</span>');
 }
-logDebug('safeHTML defined');
 
 function renderPosts() {
-  try {
-    logDebug('renderPosts start');
-    const grid  = document.getElementById('grid');
-    const count = document.getElementById('count');
-    logDebug('grid=' + !!grid + ' count=' + !!count);
-    if (!grid || !count) {
-      logDebug('ERR: missing grid/count');
-      return;
-    }
-    logDebug('POSTS len=' + POSTS.length);
-    const mixed = shuffle(POSTS);
+  const grid  = document.getElementById('grid');
+  const count = document.getElementById('count');
+  if (!grid || !count) return;
+  const mixed = shuffle(POSTS);
 
-    count.textContent = `${mixed.length} TRANSMISSIONS RECEIVED · DECRYPTING`;
+  count.textContent = `${mixed.length} TRANSMISSIONS RECEIVED · DECRYPTING`;
 
-    const html = mixed.map(p => `
-      <article class="card ${p.type}">
-        <div class="card-tag">▸ ${p.tag}</div>
-        <h2 class="card-title">${p.title}</h2>
-        <p class="card-body">${safeHTML(p.body)}</p>
-        <div class="card-foot">
-          <span>⌖ ${p.views} RECIPIENTS</span>
-          <span>⏱ ${p.time} MIN DECRYPT</span>
-        </div>
-        <div class="stamp">${p.stamp}</div>
-      </article>
-    `).join('');
-    logDebug('html len=' + html.length);
-    grid.innerHTML = html;
-    logDebug('grid children=' + grid.children.length);
+  grid.innerHTML = mixed.map(p => `
+    <article class="card ${p.type}">
+      <div class="card-tag">▸ ${p.tag}</div>
+      <h2 class="card-title">${p.title}</h2>
+      <p class="card-body">${safeHTML(p.body)}</p>
+      <div class="card-foot">
+        <span>⌖ ${p.views} RECIPIENTS</span>
+        <span>⏱ ${p.time} MIN DECRYPT</span>
+      </div>
+      <div class="stamp">${p.stamp}</div>
+    </article>
+  `).join('');
 
-    setTimeout(() => {
-      count.textContent = `${mixed.length} TRANSMISSIONS ACTIVE · ALL NODES CONFIRMED`;
-    }, 1400);
-  } catch (err) {
-    logDebug('ERR: ' + err.message);
-    const grid = document.getElementById('grid');
-    if (grid) grid.innerHTML = '<p class="card-body" style="color:var(--red-blink);padding:1rem;">ERROR: ' + err.message + '</p>';
-  }
+  setTimeout(() => {
+    count.textContent = `${mixed.length} TRANSMISSIONS ACTIVE · ALL NODES CONFIRMED`;
+  }, 1400);
 }
 
 renderPosts();
 
-window.addEventListener('error', e => logDebug('GLOBAL ERR: ' + e.message));
-} catch (e) {
-  logDebug('CATCH: ' + e.message + ' at ' + e.stack);
-}
 </script>
 </body>
 </html>
